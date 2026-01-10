@@ -1,0 +1,36 @@
+package com.javarush.ostapenko.hibernate_2.domain.entity;
+
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.annotations.JdbcTypeCode;
+
+import java.sql.Types;
+import java.util.Date;
+
+@Entity
+@Table(name = "inventory", schema = "movie")
+@Setter
+@Getter
+@NoArgsConstructor
+@ToString
+public class Inventory {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "inventory_id")
+    private Integer id;
+
+    @Column(name="film_id")
+    private Short filmId;
+
+    @Column(name="store_id")
+    @JdbcTypeCode(Types.TINYINT)
+    private Short storeId;
+
+    @Column(name="last_update")
+    private Date lastUpdate;
+
+
+}

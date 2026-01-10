@@ -19,6 +19,7 @@ public class Main {
     private final LanguageRepository languageRepository;
     private final CategoryRepository categoryRepository;
     private final FilmTextRepository filmTextRepository;
+    private final InventoryRepository inventoryRepository;
 
 
     public Main() {
@@ -28,6 +29,7 @@ public class Main {
         this.languageRepository = new LanguageRepository(sessionFactory);
         this.categoryRepository = new CategoryRepository(sessionFactory);
         this.filmTextRepository = new FilmTextRepository(sessionFactory);
+        this.inventoryRepository = new InventoryRepository(sessionFactory);
     }
 
 
@@ -57,6 +59,7 @@ public class Main {
                 .addAnnotatedClass(Language.class)
                 .addAnnotatedClass(Category.class)
                 .addAnnotatedClass(FilmText.class)
+                .addAnnotatedClass(Inventory.class)
                 .addProperties(properties)
                 .buildSessionFactory();
         return sessionFactory;
@@ -65,8 +68,8 @@ public class Main {
     private void getEntity(Main main){
         try (Session session = main.sessionFactory.getCurrentSession()) {
             session.beginTransaction();
-            List<Film> filmList = filmRepository.getAll();
-            System.out.println(filmList.get(0).getFilmText());
+//            List<Film> filmList = filmRepository.getAll();
+//            System.out.println(filmList.get(0).getFilmText());
 
 //            List<Actor> actorList = actorRepository.getAll();
 //            System.out.println(actorList);
@@ -80,6 +83,9 @@ public class Main {
 
 //            List<FilmText> filmTexts = filmTextRepository.getAll();
 //            System.out.println(filmTexts);
+
+            List<Inventory> inventoryList = inventoryRepository.getAll();
+            System.out.println(inventoryList);
 
 
             session.getTransaction().commit();
