@@ -21,6 +21,7 @@ public class Main {
     private final FilmTextRepository filmTextRepository;
     private final InventoryRepository inventoryRepository;
     private final StoreRepository storeRepository;
+    private final AddressRepository addressRepository;
 
 
     public Main() {
@@ -32,6 +33,7 @@ public class Main {
         this.filmTextRepository = new FilmTextRepository(sessionFactory);
         this.inventoryRepository = new InventoryRepository(sessionFactory);
         this.storeRepository = new StoreRepository(sessionFactory);
+        this.addressRepository = new AddressRepository(sessionFactory);
     }
 
 
@@ -63,6 +65,7 @@ public class Main {
                 .addAnnotatedClass(FilmText.class)
                 .addAnnotatedClass(Inventory.class)
                 .addAnnotatedClass(Store.class)
+                .addAnnotatedClass(Address.class)
                 .addProperties(properties)
                 .buildSessionFactory();
         return sessionFactory;
@@ -87,11 +90,13 @@ public class Main {
 //            List<FilmText> filmTexts = filmTextRepository.getAll();
 //            System.out.println(filmTexts);
 
-            List<Inventory> inventoryList = inventoryRepository.getAll();
-            System.out.println(inventoryList.get(0).getStore());
+//            List<Inventory> inventoryList = inventoryRepository.getAll();
+//            System.out.println(inventoryList.get(0).getStore());
 
 //            List<Store> storeList = storeRepository.getAll();
 //            System.out.println(storeList);
+            List<Address> addressList = addressRepository.getAll();
+            System.out.println(addressList);
 
             session.getTransaction().commit();
         }

@@ -138,7 +138,6 @@ class Address <<Entity>> {
     + city_id : SMALLINT UNSIGNED <<FK>>
     + postal_code : VARCHAR(10)
     + phone : VARCHAR(20)
-    + location : POINT
     + last_update : TIMESTAMP
 }
 
