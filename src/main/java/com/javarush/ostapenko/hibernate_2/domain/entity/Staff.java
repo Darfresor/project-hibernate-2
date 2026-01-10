@@ -40,9 +40,11 @@ public class Staff {
     @Column(name="email", length = 50)
     private String email;
 
-    @Column(name="store_id")
-    @JdbcTypeCode(Types.TINYINT)
-    private Short storeId;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="store_id")
+    private Store store;
 
     @JdbcTypeCode(Types.BIT)
     private Boolean active;

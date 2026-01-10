@@ -133,7 +133,7 @@ public class Main {
 //            System.out.println(paymentList.get(0).getCustomer());
 
             List<Staff> staffList = staffRepository.getAll();
-            System.out.println(staffList);
+            System.out.println(staffList.get(0).getStore());
 
             session.getTransaction().commit();
         }
