@@ -1,0 +1,244 @@
+@startuml
+' Настройки диаграммы
+skinparam linetype ortho
+skinparam packageStyle rectangle
+hide circle
+hide empty members
+
+' Цвета для разных типов сущностей
+skinparam class {
+    BackgroundColor<<Entity>> #E6F3FF
+    BackgroundColor<<Association>> #F0F0F0
+    BorderColor #333333
+    ArrowColor #333333
+}
+
+' Определение типов
+class Actor <<Entity>> {
+    + actor_id : SMALLINT UNSIGNED <<PK>>
+    + first_name : VARCHAR(45)
+    + last_name : VARCHAR(45)
+    + last_update : TIMESTAMP
+    --
+    + idx_actor_last_name(last_name)
+}
+
+class Film <<Entity>> {
+    + film_id : SMALLINT UNSIGNED <<PK>>
+    + title : VARCHAR(128)
+    + description : TEXT
+    + release_year : YEAR
+    + language_id : TINYINT UNSIGNED <<FK>>
+    + original_language_id : TINYINT UNSIGNED <<FK>>
+    + rental_duration : TINYINT UNSIGNED
+    + rental_rate : DECIMAL(4,2)
+    + length : SMALLINT UNSIGNED
+    + replacement_cost : DECIMAL(5,2)
+    + rating : ENUM
+    + special_features : SET
+    + last_update : TIMESTAMP
+    --
+    + idx_title(title)
+    + idx_fk_language_id(language_id)
+    + idx_fk_original_language_id(original_language_id)
+}
+
+class Language <<Entity>> {
+    + language_id : TINYINT UNSIGNED <<PK>>
+    + name : CHAR(20)
+    + last_update : TIMESTAMP
+}
+
+class FilmActor <<Association>> {
+    + actor_id : SMALLINT UNSIGNED <<PK, FK>>
+    + film_id : SMALLINT UNSIGNED <<PK, FK>>
+    + last_update : TIMESTAMP
+    --
+    + idx_fk_film_id(film_id)
+}
+
+class FilmCategory <<Association>> {
+    + film_id : SMALLINT UNSIGNED <<PK, FK>>
+    + category_id : TINYINT UNSIGNED <<PK, FK>>
+    + last_update : TIMESTAMP
+}
+
+class Category <<Entity>> {
+    + category_id : TINYINT UNSIGNED <<PK>>
+    + name : VARCHAR(25)
+    + last_update : TIMESTAMP
+}
+
+class FilmText <<Entity>> {
+    + film_id : SMALLINT <<PK>>
+    + title : VARCHAR(255)
+    + description : TEXT
+    --
+    + idx_title_description(title,description) <<FULLTEXT>>
+}
+
+class Inventory <<Entity>> {
+    + inventory_id : MEDIUMINT UNSIGNED <<PK>>
+    + film_id : SMALLINT UNSIGNED <<FK>>
+    + store_id : TINYINT UNSIGNED <<FK>>
+    + last_update : TIMESTAMP
+    --
+    + idx_fk_film_id(film_id)
+    + idx_store_id_film_id(store_id, film_id)
+}
+
+class Store <<Entity>> {
+    + store_id : TINYINT UNSIGNED <<PK>>
+    + manager_staff_id : TINYINT UNSIGNED <<FK>>
+    + address_id : SMALLINT UNSIGNED <<FK>>
+    + last_update : TIMESTAMP
+    --
+    + idx_unique_manager(manager_staff_id)
+    + idx_fk_address_id(address_id)
+}
+
+class Staff <<Entity>> {
+    + staff_id : TINYINT UNSIGNED <<PK>>
+    + first_name : VARCHAR(45)
+    + last_name : VARCHAR(45)
+    + address_id : SMALLINT UNSIGNED <<FK>>
+    + picture : BLOB
+    + email : VARCHAR(50)
+    + store_id : TINYINT UNSIGNED <<FK>>
+    + active : TINYINT(1)
+    + username : VARCHAR(16)
+    + password : VARCHAR(40)
+    + last_update : TIMESTAMP
+    --
+    + idx_fk_store_id(store_id)
+    + idx_fk_address_id(address_id)
+}
+
+class Customer <<Entity>> {
+    + customer_id : SMALLINT UNSIGNED <<PK>>
+    + store_id : TINYINT UNSIGNED <<FK>>
+    + first_name : VARCHAR(45)
+    + last_name : VARCHAR(45)
+    + email : VARCHAR(50)
+    + address_id : SMALLINT UNSIGNED <<FK>>
+    + active : TINYINT(1)
+    + create_date : DATETIME
+    + last_update : TIMESTAMP
+    --
+    + idx_fk_store_id(store_id)
+    + idx_fk_address_id(address_id)
+    + idx_last_name(last_name)
+}
+
+class Address <<Entity>> {
+    + address_id : SMALLINT UNSIGNED <<PK>>
+    + address : VARCHAR(50)
+    + address2 : VARCHAR(50)
+    + district : VARCHAR(20)
+    + city_id : SMALLINT UNSIGNED <<FK>>
+    + postal_code : VARCHAR(10)
+    + phone : VARCHAR(20)
+    + location : POINT
+    + last_update : TIMESTAMP
+}
+
+class City <<Entity>> {
+    + city_id : SMALLINT UNSIGNED <<PK>>
+    + city : VARCHAR(50)
+    + country_id : SMALLINT UNSIGNED <<FK>>
+    + last_update : TIMESTAMP
+}
+
+class Country <<Entity>> {
+    + country_id : SMALLINT UNSIGNED <<PK>>
+    + country : VARCHAR(50)
+    + last_update : TIMESTAMP
+}
+
+class Rental <<Entity>> {
+    + rental_id : INT <<PK>>
+    + rental_date : DATETIME
+    + inventory_id : MEDIUMINT UNSIGNED <<FK>>
+    + customer_id : SMALLINT UNSIGNED <<FK>>
+    + return_date : DATETIME
+    + staff_id : TINYINT UNSIGNED <<FK>>
+    + last_update : TIMESTAMP
+    --
+    + rental_date(rental_date,inventory_id,customer_id) <<UNIQUE>>
+    + idx_fk_inventory_id(inventory_id)
+    + idx_fk_customer_id(customer_id)
+    + idx_fk_staff_id(staff_id)
+}
+
+class Payment <<Entity>> {
+    + payment_id : SMALLINT UNSIGNED <<PK>>
+    + customer_id : SMALLINT UNSIGNED <<FK>>
+    + staff_id : TINYINT UNSIGNED <<FK>>
+    + rental_id : INT <<FK>>
+    + amount : DECIMAL(5,2)
+    + payment_date : DATETIME
+    + last_update : TIMESTAMP
+    --
+    + idx_fk_staff_id(staff_id)
+    + idx_fk_customer_id(customer_id)
+    + fk_payment_rental(rental_id)
+}
+
+' Связи многие-ко-многим (через ассоциативные таблицы)
+Actor "1" -- "*" FilmActor
+FilmActor "*" -- "1" Film
+
+Film "1" -- "*" FilmCategory
+FilmCategory "*" -- "1" Category
+
+' Связи один-ко-многим
+Film "1" -- "*" Inventory : "stored as"
+Film "1" -- "1" FilmText : "has text"
+
+Language "1" -- "*" Film : "primary language"
+Language "1" -- "*" Film : "original language"
+
+Store "1" -- "*" Inventory : "holds"
+Store "1" -- "*" Staff : "employs"
+Store "1" -- "*" Customer : "serves"
+
+Staff "1" -- "*" Rental : "processes"
+Staff "1" -- "*" Payment : "handles"
+Staff "1" -- "1" Store : "manages"
+
+Customer "1" -- "*" Rental : "makes"
+Customer "1" -- "*" Payment : "pays"
+
+Inventory "1" -- "*" Rental : "rented as"
+
+Rental "0..1" -- "*" Payment : "paid for"
+
+Address "1" -- "*" Staff : "located at"
+Address "1" -- "*" Store : "located at"
+Address "1" -- "*" Customer : "located at"
+
+City "1" -- "*" Address : "in"
+Country "1" -- "*" City : "in"
+
+' Нотации для внешних ключей
+note top of Film : "FK: language_id → Language.language_id\nFK: original_language_id → Language.language_id"
+note top of Customer : "FK: store_id → Store.store_id\nFK: address_id → Address.address_id"
+note top of Staff : "FK: store_id → Store.store_id\nFK: address_id → Address.address_id"
+note top of Store : "FK: manager_staff_id → Staff.staff_id\nFK: address_id → Address.address_id"
+note top of Rental : "FK: inventory_id → Inventory.inventory_id\nFK: customer_id → Customer.customer_id\nFK: staff_id → Staff.staff_id"
+note top of Payment : "FK: customer_id → Customer.customer_id\nFK: staff_id → Staff.staff_id\nFK: rental_id → Rental.rental_id"
+note top of Address : "FK: city_id → City.city_id"
+note top of City : "FK: country_id → Country.country_id"
+note top of Inventory : "FK: film_id → Film.film_id\nFK: store_id → Store.store_id"
+
+' Легенда
+legend right
+    <<Entity>> - Основные таблицы
+    <<Association>> - Ассоциативные таблицы
+    <<PK>> - Первичный ключ
+    <<FK>> - Внешний ключ
+    <<UNIQUE>> - Уникальный индекс
+    <<FULLTEXT>> - Полнотекстовый индекс
+end legend
+
+@enduml
