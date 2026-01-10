@@ -10,6 +10,7 @@ import org.hibernate.annotations.JdbcTypeCode;
 import java.math.BigDecimal;
 import java.sql.Types;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "film", schema = "movie")
@@ -49,6 +50,14 @@ public class Film {
     private String specialFeatures;
     @Column(name = "last_update")
     private Date lastUpdate;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "film_actor",
+            joinColumns = @JoinColumn(name = "film_id"),
+            inverseJoinColumns = @JoinColumn(name = "actor_id")
+    )
+    private List<Actor> actorList;
 
 
 }

@@ -58,11 +58,13 @@ public class Main {
     private void getEntity(Main main){
         try (Session session = main.sessionFactory.getCurrentSession()) {
             session.beginTransaction();
-            //List<Film> filmList = filmRepository.getAll();
-            List<Actor> actorList = actorRepository.getAll();
+            List<Film> filmList = filmRepository.getAll();
+            System.out.println(filmList);
 
-            //System.out.println(filmList);
-            System.out.println(actorList);
+//            List<Actor> actorList = actorRepository.getAll();
+//            System.out.println(actorList);
+
+
 
             session.getTransaction().commit();
         }
