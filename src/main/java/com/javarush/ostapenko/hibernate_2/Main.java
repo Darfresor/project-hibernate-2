@@ -22,6 +22,7 @@ public class Main {
     private final InventoryRepository inventoryRepository;
     private final StoreRepository storeRepository;
     private final AddressRepository addressRepository;
+    private final CityRepository cityRepository;
 
 
     public Main() {
@@ -34,6 +35,7 @@ public class Main {
         this.inventoryRepository = new InventoryRepository(sessionFactory);
         this.storeRepository = new StoreRepository(sessionFactory);
         this.addressRepository = new AddressRepository(sessionFactory);
+        this.cityRepository = new CityRepository(sessionFactory);
     }
 
 
@@ -66,6 +68,7 @@ public class Main {
                 .addAnnotatedClass(Inventory.class)
                 .addAnnotatedClass(Store.class)
                 .addAnnotatedClass(Address.class)
+                .addAnnotatedClass(City.class)
                 .addProperties(properties)
                 .buildSessionFactory();
         return sessionFactory;
@@ -93,11 +96,14 @@ public class Main {
 //            List<Inventory> inventoryList = inventoryRepository.getAll();
 //            System.out.println(inventoryList.get(0).getStore());
 
-            List<Store> storeList = storeRepository.getAll();
-            System.out.println(storeList.get(0).getAddress());
+//            List<Store> storeList = storeRepository.getAll();
+//            System.out.println(storeList.get(0).getAddress());
 
 //            List<Address> addressList = addressRepository.getAll();
 //            System.out.println(addressList);
+
+            List<City> cityList = cityRepository.getAll();
+            System.out.println(cityList);
 
             session.getTransaction().commit();
         }
