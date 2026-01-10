@@ -26,9 +26,10 @@ public class Inventory {
     @JoinColumn(name="film_id")
     private Film film;
 
-    @Column(name="store_id")
-    @JdbcTypeCode(Types.TINYINT)
-    private Short storeId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="store_id")
+    private Store store;
 
     @Column(name="last_update")
     private Date lastUpdate;

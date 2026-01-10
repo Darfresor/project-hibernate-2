@@ -87,11 +87,11 @@ public class Main {
 //            List<FilmText> filmTexts = filmTextRepository.getAll();
 //            System.out.println(filmTexts);
 
-//            List<Inventory> inventoryList = inventoryRepository.getAll();
-//            System.out.println(inventoryList.get(0).getFilm());
+            List<Inventory> inventoryList = inventoryRepository.getAll();
+            System.out.println(inventoryList.get(0).getStore());
 
-            List<Store> storeList = storeRepository.getAll();
-            System.out.println(storeList);
+//            List<Store> storeList = storeRepository.getAll();
+//            System.out.println(storeList);
 
             session.getTransaction().commit();
         }
