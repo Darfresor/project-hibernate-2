@@ -68,7 +68,8 @@ public class Main {
     private void getEntity(Main main){
         try (Session session = main.sessionFactory.getCurrentSession()) {
             session.beginTransaction();
-//            List<Film> filmList = filmRepository.getAll();
+            List<Film> filmList = filmRepository.getAll();
+            System.out.println(filmList.get(0).getCategoryList());
 //            System.out.println(filmList);
 
 //            List<Actor> actorList = actorRepository.getAll();
@@ -78,8 +79,8 @@ public class Main {
 //            List<Language> languageList = languageRepository.getAll();
 //            System.out.println(languageList);
 
-            List<Category> categoryListList = categoryRepository.getAll();
-            System.out.println(categoryListList);
+//            List<Category> categoryListList = categoryRepository.getAll();
+//            System.out.println(categoryListList);
 
 
 
