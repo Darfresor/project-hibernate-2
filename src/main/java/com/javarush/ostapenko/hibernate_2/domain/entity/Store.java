@@ -25,9 +25,9 @@ public class Store {
     @JdbcTypeCode(Types.TINYINT)
     private Short id;
 
-    @Column(name = "manager_staff_id")
-    @JdbcTypeCode(Types.TINYINT)
-    private Short managerStaffId;
+    @OneToOne(mappedBy = "store")
+    @ToString.Exclude
+    private Staff staff;
 
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -42,7 +42,7 @@ public class Staff {
 
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="store_id")
     private Store store;
 
