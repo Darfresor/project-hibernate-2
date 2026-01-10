@@ -22,9 +22,10 @@ public class Customer {
     @Column(name = "customer_id")
     private Short id;
 
-    @Column(name="store_id")
-    @JdbcTypeCode(Types.TINYINT)
-    private Short storeId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="store_id")
+    private Store store;
 
     @Column(name="first_name", length = 45)
     private String firstName;
