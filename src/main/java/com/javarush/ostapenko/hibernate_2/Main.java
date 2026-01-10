@@ -85,7 +85,7 @@ public class Main {
 //            System.out.println(filmTexts);
 
             List<Inventory> inventoryList = inventoryRepository.getAll();
-            System.out.println(inventoryList);
+            System.out.println(inventoryList.get(0).getFilm());
 
 
             session.getTransaction().commit();

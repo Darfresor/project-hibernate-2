@@ -22,8 +22,9 @@ public class Inventory {
     @Column(name = "inventory_id")
     private Integer id;
 
-    @Column(name="film_id")
-    private Short filmId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="film_id")
+    private Film film;
 
     @Column(name="store_id")
     @JdbcTypeCode(Types.TINYINT)
