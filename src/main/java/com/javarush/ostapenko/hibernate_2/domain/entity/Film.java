@@ -76,4 +76,8 @@ public class Film {
     )
     private List<Category> categoryList;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="film_id")
+    private FilmText filmText;
+
 }
