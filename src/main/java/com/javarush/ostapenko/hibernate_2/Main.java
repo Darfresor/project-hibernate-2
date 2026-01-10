@@ -99,11 +99,11 @@ public class Main {
 //            List<Store> storeList = storeRepository.getAll();
 //            System.out.println(storeList.get(0).getAddress());
 
-//            List<Address> addressList = addressRepository.getAll();
-//            System.out.println(addressList);
+            List<Address> addressList = addressRepository.getAll();
+            System.out.println(addressList.get(0).getCity());
 
-            List<City> cityList = cityRepository.getAll();
-            System.out.println(cityList);
+//            List<City> cityList = cityRepository.getAll();
+//            System.out.println(cityList);
 
             session.getTransaction().commit();
         }

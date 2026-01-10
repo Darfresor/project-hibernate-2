@@ -24,8 +24,10 @@ public class Address {
     @Column(name = "address_id")
     private Short id;
 
-    @Column(name="city_id")
-    private Short cityId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="city_id")
+    private City city;
 
     @Column(name="last_update")
     private Date lastUpdate;
