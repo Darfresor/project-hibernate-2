@@ -30,8 +30,10 @@ public class Payment {
     @JdbcTypeCode(Types.TINYINT)
     private Short staffId;
 
-    @Column(name="rental_id")
-    private Integer rentalId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="rental_id")
+    private Rental rental;
 
     private BigDecimal amount;
 

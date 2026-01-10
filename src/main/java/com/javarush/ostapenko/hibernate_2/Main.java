@@ -127,7 +127,7 @@ public class Main {
 //            System.out.println(rentalList.get(0).getInventory());
 
             List<Payment> paymentList = paymentRepository.getAll();
-            System.out.println(paymentList);
+            System.out.println(paymentList.get(0).getRental());
 
 
             session.getTransaction().commit();
