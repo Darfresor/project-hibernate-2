@@ -26,6 +26,7 @@ public class Main {
     private final CountryRepository countryRepository;
     private final CustomerRepository customerRepository;
     private final RentalRepository rentalRepository;
+    private final PaymentRepository paymentRepository;
 
 
     public Main() {
@@ -42,6 +43,7 @@ public class Main {
         this.countryRepository = new CountryRepository(sessionFactory);
         this.customerRepository = new CustomerRepository(sessionFactory);
         this.rentalRepository = new RentalRepository(sessionFactory);
+        this.paymentRepository = new PaymentRepository(sessionFactory);
     }
 
 
@@ -78,6 +80,7 @@ public class Main {
                 .addAnnotatedClass(Country.class)
                 .addAnnotatedClass(Customer.class)
                 .addAnnotatedClass(Rental.class)
+                .addAnnotatedClass(Payment.class)
                 .addProperties(properties)
                 .buildSessionFactory();
         return sessionFactory;
@@ -120,8 +123,11 @@ public class Main {
 //            List<Customer> customerList = customerRepository.getAll();
 //            System.out.println(customerList.get(0).getStore());
 
-            List<Rental> rentalList = rentalRepository.getAll();
-            System.out.println(rentalList.get(0).getInventory());
+//            List<Rental> rentalList = rentalRepository.getAll();
+//            System.out.println(rentalList.get(0).getInventory());
+
+            List<Payment> paymentList = paymentRepository.getAll();
+            System.out.println(paymentList);
 
 
             session.getTransaction().commit();
