@@ -1,6 +1,8 @@
 package com.javarush.ostapenko.hibernate_2;
 
+import com.javarush.ostapenko.hibernate_2.domain.entity.Actor;
 import com.javarush.ostapenko.hibernate_2.domain.entity.Film;
+import com.javarush.ostapenko.hibernate_2.domain.repository.ActorRepository;
 import com.javarush.ostapenko.hibernate_2.domain.repository.FilmRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -15,11 +17,13 @@ public class Main {
     private final SessionFactory sessionFactory;
 
     private final FilmRepository filmRepository;
+    private final ActorRepository actorRepository;
 
 
     public Main() {
         this.sessionFactory = prepareRelationalDb();
         this.filmRepository = new FilmRepository(sessionFactory);
+        this.actorRepository = new ActorRepository(sessionFactory);
     }
 
 
@@ -45,6 +49,7 @@ public class Main {
 
         sessionFactory = new Configuration()
                 .addAnnotatedClass(Film.class)
+                .addAnnotatedClass(Actor.class)
                 .addProperties(properties)
                 .buildSessionFactory();
         return sessionFactory;
@@ -53,9 +58,11 @@ public class Main {
     private void getEntity(Main main){
         try (Session session = main.sessionFactory.getCurrentSession()) {
             session.beginTransaction();
-            List<Film> filmList = filmRepository.getAll();
+            //List<Film> filmList = filmRepository.getAll();
+            List<Actor> actorList = actorRepository.getAll();
 
-            System.out.println(filmList);
+            //System.out.println(filmList);
+            System.out.println(actorList);
 
             session.getTransaction().commit();
         }
