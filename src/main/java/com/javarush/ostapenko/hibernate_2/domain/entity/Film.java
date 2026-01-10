@@ -29,12 +29,21 @@ public class Film {
     private String description;
     @Column(name = "release_year", columnDefinition = "YEAR")
     private Integer releaseYear;
-    @Column(name = "language_id")
-    @JdbcTypeCode(Types.TINYINT)
-    private Integer languageId;
+
+    @OneToMany
+    @JoinColumn(name="language_id")
+    private List<Language> languageList;
+
+
     @Column(name = "original_language_id")
     @JdbcTypeCode(Types.TINYINT)
     private Integer originalLanguageId;
+
+//    @OneToMany
+//    @JoinColumn(name="original_language_id")
+//    private List<Language> originalLanguageList;
+
+
     @Column(name = "rental_duration")
     @JdbcTypeCode(Types.TINYINT)
     private Integer rentalDuration;
