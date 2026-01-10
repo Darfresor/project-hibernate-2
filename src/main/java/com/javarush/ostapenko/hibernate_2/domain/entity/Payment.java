@@ -27,9 +27,10 @@ public class Payment {
     @JoinColumn(name="customer_id")
     private Customer customer;
 
-    @Column(name="staff_id")
-    @JdbcTypeCode(Types.TINYINT)
-    private Short staffId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="staff_id")
+    private Staff staff;
 
 
     @ManyToOne(fetch = FetchType.LAZY)

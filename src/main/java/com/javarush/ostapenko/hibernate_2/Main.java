@@ -126,11 +126,11 @@ public class Main {
 //            List<Customer> customerList = customerRepository.getAll();
 //            System.out.println(customerList.get(0).getStore());
 
-            List<Rental> rentalList = rentalRepository.getAll();
-            System.out.println(rentalList.get(0).getStaff());
+//            List<Rental> rentalList = rentalRepository.getAll();
+//            System.out.println(rentalList.get(0).getStaff());
 
-//            List<Payment> paymentList = paymentRepository.getAll();
-//            System.out.println(paymentList.get(0).getCustomer());
+            List<Payment> paymentList = paymentRepository.getAll();
+            System.out.println(paymentList.get(0).getStaff());
 
 //            List<Staff> staffList = staffRepository.getAll();
 //            System.out.println(staffList.get(0).getAddress());
