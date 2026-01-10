@@ -39,9 +39,11 @@ public class Rental {
     @Column(name="return_date")
     private Date returnDate;
 
-    @Column(name="staff_id")
-    @JdbcTypeCode(Types.TINYINT)
-    private Short staffId;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="staff_id")
+    private Staff staff;
 
     @Column(name="last_update")
     private Date lastUpdate;
