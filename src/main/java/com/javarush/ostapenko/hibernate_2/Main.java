@@ -115,7 +115,7 @@ public class Main {
 //            System.out.println(countryList);
 
             List<Customer> customerList = customerRepository.getAll();
-            System.out.println(customerList);
+            System.out.println(customerList.get(0).getAddress());
 
             session.getTransaction().commit();
         }
