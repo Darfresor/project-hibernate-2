@@ -31,8 +31,10 @@ public class Staff {
     @Column(name="last_name", length = 45)
     private String lastName;
 
-    @Column(name="address_id")
-    private Short addressId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="address_id")
+    private Address address;
 
 
     private byte[] picture;

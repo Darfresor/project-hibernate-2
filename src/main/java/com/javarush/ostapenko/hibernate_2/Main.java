@@ -111,8 +111,8 @@ public class Main {
 //            List<Inventory> inventoryList = inventoryRepository.getAll();
 //            System.out.println(inventoryList.get(0).getStore());
 
-            List<Store> storeList = storeRepository.getAll();
-            System.out.println(storeList.get(0).getStaff());
+//            List<Store> storeList = storeRepository.getAll();
+//            System.out.println(storeList.get(0).getStaff());
 
 //            List<Address> addressList = addressRepository.getAll();
 //            System.out.println(addressList.get(0).getCity());
@@ -132,8 +132,8 @@ public class Main {
 //            List<Payment> paymentList = paymentRepository.getAll();
 //            System.out.println(paymentList.get(0).getCustomer());
 
-//            List<Staff> staffList = staffRepository.getAll();
-//            System.out.println(staffList.get(0).getStore());
+            List<Staff> staffList = staffRepository.getAll();
+            System.out.println(staffList.get(0).getAddress());
 
             session.getTransaction().commit();
         }
