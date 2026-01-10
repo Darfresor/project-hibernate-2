@@ -93,10 +93,11 @@ public class Main {
 //            List<Inventory> inventoryList = inventoryRepository.getAll();
 //            System.out.println(inventoryList.get(0).getStore());
 
-//            List<Store> storeList = storeRepository.getAll();
-//            System.out.println(storeList);
-            List<Address> addressList = addressRepository.getAll();
-            System.out.println(addressList);
+            List<Store> storeList = storeRepository.getAll();
+            System.out.println(storeList.get(0).getAddress());
+
+//            List<Address> addressList = addressRepository.getAll();
+//            System.out.println(addressList);
 
             session.getTransaction().commit();
         }

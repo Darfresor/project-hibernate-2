@@ -29,8 +29,10 @@ public class Store {
     @JdbcTypeCode(Types.TINYINT)
     private Short managerStaffId;
 
-    @Column(name = "address_id")
-    private Short addressId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "address_id")
+    private Address address;
 
     @Column(name = "last_update")
     private Date lastUpdate;
