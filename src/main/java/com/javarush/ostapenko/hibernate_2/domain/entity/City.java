@@ -24,8 +24,10 @@ public class City {
     @Column(name = "city_id")
     private Short id;
 
-    @Column(name="country_id")
-    private Short countyId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="country_id")
+    private Country county;
 
     @Column(name="last_update")
     private Date lastUpdate;

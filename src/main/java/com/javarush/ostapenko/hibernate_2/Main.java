@@ -105,11 +105,11 @@ public class Main {
 //            List<Address> addressList = addressRepository.getAll();
 //            System.out.println(addressList.get(0).getCity());
 
-//            List<City> cityList = cityRepository.getAll();
-//            System.out.println(cityList);
+            List<City> cityList = cityRepository.getAll();
+            System.out.println(cityList.get(0).getCounty());
 
-            List<Country> countryList = countryRepository.getAll();
-            System.out.println(countryList);
+//            List<Country> countryList = countryRepository.getAll();
+//            System.out.println(countryList);
 
             session.getTransaction().commit();
         }
