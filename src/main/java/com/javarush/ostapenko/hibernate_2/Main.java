@@ -121,7 +121,7 @@ public class Main {
 //            System.out.println(customerList.get(0).getStore());
 
             List<Rental> rentalList = rentalRepository.getAll();
-            System.out.println(rentalList.get(0).getCustomer());
+            System.out.println(rentalList.get(0).getInventory());
 
 
             session.getTransaction().commit();

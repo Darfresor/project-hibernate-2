@@ -25,8 +25,10 @@ public class Rental {
     @Column(name="rental_date")
     private Date rentalDate;
 
-    @Column(name="inventory_id")
-    private Integer inventoryId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="inventory_id")
+    private Inventory inventory;
 
 
 
