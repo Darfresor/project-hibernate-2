@@ -1,9 +1,11 @@
 package com.javarush.ostapenko.hibernate_2;
 
 import com.javarush.ostapenko.hibernate_2.domain.entity.Actor;
+import com.javarush.ostapenko.hibernate_2.domain.entity.Category;
 import com.javarush.ostapenko.hibernate_2.domain.entity.Film;
 import com.javarush.ostapenko.hibernate_2.domain.entity.Language;
 import com.javarush.ostapenko.hibernate_2.domain.repository.ActorRepository;
+import com.javarush.ostapenko.hibernate_2.domain.repository.CategoryRepository;
 import com.javarush.ostapenko.hibernate_2.domain.repository.FilmRepository;
 import com.javarush.ostapenko.hibernate_2.domain.repository.LanguageRepository;
 import org.hibernate.Session;
@@ -21,6 +23,7 @@ public class Main {
     private final FilmRepository filmRepository;
     private final ActorRepository actorRepository;
     private final LanguageRepository languageRepository;
+    private final CategoryRepository categoryRepository;
 
 
     public Main() {
@@ -28,6 +31,7 @@ public class Main {
         this.filmRepository = new FilmRepository(sessionFactory);
         this.actorRepository = new ActorRepository(sessionFactory);
         this.languageRepository = new LanguageRepository(sessionFactory);
+        this.categoryRepository = new CategoryRepository(sessionFactory);
     }
 
 
@@ -55,6 +59,7 @@ public class Main {
                 .addAnnotatedClass(Film.class)
                 .addAnnotatedClass(Actor.class)
                 .addAnnotatedClass(Language.class)
+                .addAnnotatedClass(Category.class)
                 .addProperties(properties)
                 .buildSessionFactory();
         return sessionFactory;
@@ -63,8 +68,8 @@ public class Main {
     private void getEntity(Main main){
         try (Session session = main.sessionFactory.getCurrentSession()) {
             session.beginTransaction();
-            List<Film> filmList = filmRepository.getAll();
-            System.out.println(filmList);
+//            List<Film> filmList = filmRepository.getAll();
+//            System.out.println(filmList);
 
 //            List<Actor> actorList = actorRepository.getAll();
 //            System.out.println(actorList);
@@ -72,6 +77,9 @@ public class Main {
 
 //            List<Language> languageList = languageRepository.getAll();
 //            System.out.println(languageList);
+
+            List<Category> categoryListList = categoryRepository.getAll();
+            System.out.println(categoryListList);
 
 
 
