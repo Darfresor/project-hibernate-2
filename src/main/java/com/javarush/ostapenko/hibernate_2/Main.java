@@ -149,10 +149,34 @@ public class Main {
 //        main.getEntity(main);
 //        Customer customer = main.createCustomer();
 //        main.returnRentedMovie();
-        main.customerRentsFromStore();
+//        main.customerRentsFromStore();
 
+        main.addNewFilmInCollection();
 
         main.shutdown();
+    }
+
+    private void addNewFilmInCollection() {
+        try (Session session = sessionFactory.getCurrentSession()) {
+            session.beginTransaction();
+
+            Language language = languageRepository.getById(1);
+
+            Film film = new Film();
+            film.setTitle("little pony");
+            film.setDescription("little little pony");
+            film.setReleaseYear(2026);
+            film.setLanguage(language);
+            film.setRentalDuration(20);
+            film.setRentalRate(BigDecimal.valueOf(1.99));
+            film.setLength((short) 13);
+            film.setReplacementCost(BigDecimal.valueOf(13.33));
+            film.setRating("PG");
+            film.setSpecialFeatures("Deleted Scenes,Behind the Scenes");
+            filmRepository.save(film);
+
+            session.getTransaction().commit();
+        }
     }
 
     private void customerRentsFromStore() {
