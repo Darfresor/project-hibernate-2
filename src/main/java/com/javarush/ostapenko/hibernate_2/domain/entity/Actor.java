@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
 
@@ -24,6 +25,7 @@ public class Actor {
     @Column(name="last_name", length = 45)
     private String lastName;
     @Column(name="last_update")
+    @UpdateTimestamp
     private Date lastUpdate;
 
 }

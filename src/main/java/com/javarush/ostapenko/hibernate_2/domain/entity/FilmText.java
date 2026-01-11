@@ -17,7 +17,6 @@ import java.sql.Types;
 @ToString
 public class FilmText {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "film_id")
     private Short id;
 
