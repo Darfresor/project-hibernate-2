@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.sql.Types;
@@ -58,6 +59,7 @@ public class Film {
     @JdbcTypeCode(Types.CHAR)
     private String specialFeatures;
     @Column(name = "last_update")
+    @UpdateTimestamp
     private Date lastUpdate;
 
     @ManyToMany(fetch = FetchType.LAZY)
