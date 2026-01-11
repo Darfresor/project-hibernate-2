@@ -6,8 +6,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Types;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -23,7 +25,7 @@ public class Rental {
     private Integer id;
 
     @Column(name="rental_date")
-    private Date rentalDate;
+    private LocalDateTime rentalDate;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -37,7 +39,7 @@ public class Rental {
     private Customer customer;
 
     @Column(name="return_date")
-    private Date returnDate;
+    private LocalDateTime returnDate;
 
 
 
@@ -46,5 +48,6 @@ public class Rental {
     private Staff staff;
 
     @Column(name="last_update")
+    @UpdateTimestamp
     private Date lastUpdate;
 }
