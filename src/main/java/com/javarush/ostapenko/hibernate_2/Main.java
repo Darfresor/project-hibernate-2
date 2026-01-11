@@ -162,9 +162,20 @@ public class Main {
 
             Language language = languageRepository.getById(1);
 
+            Category category = categoryRepository.getById(1);
+            List<Category> categoryList = new ArrayList<>();
+            categoryList.add(category);
+
+            Actor actor1 = actorRepository.getById(1);
+            Actor actor2 = actorRepository.getById(2);
+            List<Actor> actorList = new ArrayList<>();
+            actorList.add(actor1);
+            actorList.add(actor2);
+
+
             Film film = new Film();
-            film.setTitle("little pony");
-            film.setDescription("little little pony");
+            film.setTitle("little pony2");
+            film.setDescription("little little pony2");
             film.setReleaseYear(2026);
             film.setLanguage(language);
             film.setRentalDuration(20);
@@ -173,7 +184,15 @@ public class Main {
             film.setReplacementCost(BigDecimal.valueOf(13.33));
             film.setRating("PG");
             film.setSpecialFeatures("Deleted Scenes,Behind the Scenes");
+            film.setCategoryList(categoryList);
+            film.setActorList(actorList);
             filmRepository.save(film);
+
+            FilmText filmText = new FilmText();
+            filmText.setId(film.getId());
+            filmText.setTitle("little pony2");
+            filmText.setDescription("little little pony2");
+            filmTextRepository.save(filmText);
 
             session.getTransaction().commit();
         }
