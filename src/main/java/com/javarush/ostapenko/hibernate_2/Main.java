@@ -96,8 +96,9 @@ public class Main {
         try (Session session = main.sessionFactory.getCurrentSession()) {
             session.beginTransaction();
 
-//            List<Film> filmList = filmRepository.findAll();
-//            System.out.println(filmList.get(0).getFilmText());
+            List<Film> filmList = filmRepository.findAll();
+            System.out.println(filmList.get(0).getLanguage());
+            System.out.println(filmList.get(0).getOriginalLanguage());
 //
 //            List<Actor> actorList = actorRepository.findAll();
 //            System.out.println(actorList);
@@ -146,12 +147,12 @@ public class Main {
 
     public static void main(String[] args) {
         Main main = new Main();
-//        main.getEntity(main);
+        main.getEntity(main);
 //        Customer customer = main.createCustomer();
 //        main.returnRentedMovie();
 //        main.customerRentsFromStore();
 
-        main.addNewFilmInCollection();
+//        main.addNewFilmInCollection();
 
         main.shutdown();
     }

@@ -35,15 +35,9 @@ public class Film {
     @JoinColumn(name="language_id")
     private Language language;
 
-
-    @Column(name = "original_language_id")
-    @JdbcTypeCode(Types.TINYINT)
-    private Integer originalLanguageId;
-
-//    @OneToMany
-//    @JoinColumn(name="original_language_id")
-//    private List<Language> originalLanguageList;
-
+    @OneToOne
+    @JoinColumn(name="original_language_id")
+    private Language originalLanguage;
 
     @Column(name = "rental_duration")
     @JdbcTypeCode(Types.TINYINT)
