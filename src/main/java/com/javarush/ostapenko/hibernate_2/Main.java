@@ -31,7 +31,6 @@ public class Main {
     private final StaffRepository staffRepository;
 
 
-
     public Main() {
         this.sessionFactory = prepareRelationalDb();
         this.filmRepository = new FilmRepository(sessionFactory);
@@ -52,12 +51,12 @@ public class Main {
     }
 
 
-
     private void shutdown() {
         if (nonNull(sessionFactory)) {
             sessionFactory.close();
         }
     }
+
     private SessionFactory prepareRelationalDb() {
         final SessionFactory sessionFactory;
         Properties properties = new Properties();
@@ -92,7 +91,7 @@ public class Main {
         return sessionFactory;
     }
 
-    private void getEntity(Main main){
+    private void getEntity(Main main) {
         try (Session session = main.sessionFactory.getCurrentSession()) {
             session.beginTransaction();
 
@@ -144,21 +143,39 @@ public class Main {
     }
 
 
-
-
     public static void main(String[] args) {
         Main main = new Main();
 //        main.getEntity(main);
 //        Customer customer = main.createCustomer();
-        main.returnRentedMovie();
-
-
+//        main.returnRentedMovie();
+        main.customerRentsFromStore();
 
 
         main.shutdown();
     }
 
-    private  void returnRentedMovie() {
+    private void customerRentsFromStore() {
+        try (Session session = sessionFactory.getCurrentSession()) {
+            session.beginTransaction();
+
+            Customer customer = customerRepository.getById(1);
+            Store store = storeRepository.getById(1);
+            Staff staff = store.getStaff();
+            Inventory inventory = inventoryRepository.getById(2294);
+
+            Rental rental = new Rental();
+            rental.setRentalDate(LocalDateTime.now());
+            rental.setInventory(inventory);
+            rental.setCustomer(customer);
+            rental.setStaff(staff);
+            rentalRepository.save(rental);
+
+
+            session.getTransaction().commit();
+        }
+    }
+
+    private void returnRentedMovie() {
         try (Session session = sessionFactory.getCurrentSession()) {
             session.beginTransaction();
 
@@ -175,7 +192,7 @@ public class Main {
         try (Session session = sessionFactory.getCurrentSession()) {
             session.beginTransaction();
 
-            Store store = storeRepository.getItems(0,1).get(0);
+            Store store = storeRepository.getItems(0, 1).get(0);
 
             City city = cityRepository.getById(1);
 
