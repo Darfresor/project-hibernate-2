@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 import static java.util.Objects.nonNull;
@@ -148,13 +149,26 @@ public class Main {
     public static void main(String[] args) {
         Main main = new Main();
 //        main.getEntity(main);
-        Customer customer = main.createCustomer();
-
+//        Customer customer = main.createCustomer();
+        main.returnRentedMovie();
 
 
 
 
         main.shutdown();
+    }
+
+    private  void returnRentedMovie() {
+        try (Session session = sessionFactory.getCurrentSession()) {
+            session.beginTransaction();
+
+            Rental rental = rentalRepository.getById(11496);
+            rental.setReturnDate(LocalDateTime.now());
+            rentalRepository.save(rental);
+
+
+            session.getTransaction().commit();
+        }
     }
 
     private Customer createCustomer() {
