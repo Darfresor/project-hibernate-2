@@ -30,6 +30,7 @@ public class Main {
     private final StaffRepository staffRepository;
 
 
+
     public Main() {
         this.sessionFactory = prepareRelationalDb();
         this.filmRepository = new FilmRepository(sessionFactory);
@@ -46,6 +47,7 @@ public class Main {
         this.rentalRepository = new RentalRepository(sessionFactory);
         this.paymentRepository = new PaymentRepository(sessionFactory);
         this.staffRepository = new StaffRepository(sessionFactory);
+
     }
 
 
@@ -92,48 +94,49 @@ public class Main {
     private void getEntity(Main main){
         try (Session session = main.sessionFactory.getCurrentSession()) {
             session.beginTransaction();
-//            List<Film> filmList = filmRepository.getAll();
+
+//            List<Film> filmList = filmRepository.findAll();
 //            System.out.println(filmList.get(0).getFilmText());
-
-//            List<Actor> actorList = actorRepository.getAll();
+//
+//            List<Actor> actorList = actorRepository.findAll();
 //            System.out.println(actorList);
-
-
-//            List<Language> languageList = languageRepository.getAll();
+//
+//
+//            List<Language> languageList = languageRepository.findAll();
 //            System.out.println(languageList);
-
-//            List<Category> categoryListList = categoryRepository.getAll();
+//
+//            List<Category> categoryListList = categoryRepository.findAll();
 //            System.out.println(categoryListList);
-
-//            List<FilmText> filmTexts = filmTextRepository.getAll();
+//
+//            List<FilmText> filmTexts = filmTextRepository.findAll();
 //            System.out.println(filmTexts);
-
-//            List<Inventory> inventoryList = inventoryRepository.getAll();
+//
+//            List<Inventory> inventoryList = inventoryRepository.findAll();
 //            System.out.println(inventoryList.get(0).getStore());
-
-//            List<Store> storeList = storeRepository.getAll();
+//
+//            List<Store> storeList = storeRepository.findAll();
 //            System.out.println(storeList.get(0).getStaff());
-
-//            List<Address> addressList = addressRepository.getAll();
+//
+//            List<Address> addressList = addressRepository.findAll();
 //            System.out.println(addressList.get(0).getCity());
-
-//            List<City> cityList = cityRepository.getAll();
+//
+//            List<City> cityList = cityRepository.findAll();
 //            System.out.println(cityList.get(0).getCounty());
-
-//            List<Country> countryList = countryRepository.getAll();
+//
+//            List<Country> countryList = countryRepository.findAll();
 //            System.out.println(countryList);
-
-//            List<Customer> customerList = customerRepository.getAll();
+//
+//            List<Customer> customerList = customerRepository.findAll();
 //            System.out.println(customerList.get(0).getStore());
-
-//            List<Rental> rentalList = rentalRepository.getAll();
+//
+//            List<Rental> rentalList = rentalRepository.findAll();
 //            System.out.println(rentalList.get(0).getStaff());
+//
+//            List<Payment> paymentList = paymentRepository.findAll();
+//            System.out.println(paymentList.get(0).getStaff());
 
-            List<Payment> paymentList = paymentRepository.getAll();
-            System.out.println(paymentList.get(0).getStaff());
-
-//            List<Staff> staffList = staffRepository.getAll();
-//            System.out.println(staffList.get(0).getAddress());
+            List<Staff> staffList = staffRepository.findAll();
+            System.out.println(staffList.get(0).getAddress());
 
             session.getTransaction().commit();
         }
@@ -145,6 +148,7 @@ public class Main {
     public static void main(String[] args) {
         Main main = new Main();
         main.getEntity(main);
+
 
 
 

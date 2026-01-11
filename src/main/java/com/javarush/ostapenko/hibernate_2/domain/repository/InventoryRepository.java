@@ -7,15 +7,9 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class InventoryRepository {
-    private final SessionFactory sessionFactory;
+public class InventoryRepository extends GenericRepository<Inventory>{
 
     public InventoryRepository(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-
-    public List<Inventory> getAll() {
-        Query<Inventory> query = sessionFactory.getCurrentSession().createQuery("select c from Inventory c", Inventory.class);
-        return query.list();
+        super(Inventory.class, sessionFactory);
     }
 }

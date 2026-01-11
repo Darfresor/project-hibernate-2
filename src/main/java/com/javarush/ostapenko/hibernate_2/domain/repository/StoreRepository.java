@@ -7,15 +7,8 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class StoreRepository {
-    private final SessionFactory sessionFactory;
-
+public class StoreRepository extends GenericRepository<Store>{
     public StoreRepository(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-
-    public List<Store> getAll() {
-        Query<Store> query = sessionFactory.getCurrentSession().createQuery("select c from Store c", Store.class);
-        return query.list();
+        super(Store.class, sessionFactory);
     }
 }

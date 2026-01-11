@@ -6,17 +6,10 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class FilmRepository {
-    private final SessionFactory sessionFactory;
+public class FilmRepository extends GenericRepository<Film>{
+
 
     public FilmRepository(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
+        super(Film.class, sessionFactory);
     }
-
-    public List<Film> getAll() {
-        Query<Film> query = sessionFactory.getCurrentSession().createQuery("select c from Film c", Film.class);
-        return query.list();
-    }
-
-
 }

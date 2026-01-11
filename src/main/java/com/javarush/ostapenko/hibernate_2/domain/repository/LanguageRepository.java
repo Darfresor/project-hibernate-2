@@ -6,15 +6,9 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class LanguageRepository {
-    private final SessionFactory sessionFactory;
+public class LanguageRepository extends GenericRepository<Language>{
 
     public LanguageRepository(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-
-    public List<Language> getAll() {
-        Query<Language> query = sessionFactory.getCurrentSession().createQuery("select c from Language c", Language.class);
-        return query.list();
+        super(Language.class, sessionFactory);
     }
 }
