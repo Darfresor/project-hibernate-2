@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Types;
 import java.util.Date;
@@ -44,9 +46,11 @@ public class Customer {
     private Boolean active;
 
     @Column(name="create_date")
+    @CreationTimestamp
     private Date createDate;
 
     @Column(name="last_update")
+    @UpdateTimestamp
     private Date lastUpdate;
 
 

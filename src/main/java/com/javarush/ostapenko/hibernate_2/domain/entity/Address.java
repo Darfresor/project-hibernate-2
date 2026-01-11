@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.sql.Types;
@@ -30,6 +31,7 @@ public class Address {
     private City city;
 
     @Column(name="last_update")
+    @UpdateTimestamp
     private Date lastUpdate;
 
     @Column(length = 50)
