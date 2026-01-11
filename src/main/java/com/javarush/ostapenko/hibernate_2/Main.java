@@ -147,11 +147,10 @@ public class Main {
     public static void main(String[] args) {
         Main main = new Main();
         main.getEntity(main);
-//        Customer customer = main.createCustomer();
-//        main.returnRentedMovie();
-//        main.customerRentsFromStore();
-
-//        main.addNewFilmInCollection();
+        main.createCustomer();
+        main.returnRentedMovie();
+        main.customerRentsFromStore();
+        main.addNewFilmInCollection();
 
         main.shutdown();
     }
@@ -192,6 +191,7 @@ public class Main {
             filmText.setId(film.getId());
             filmText.setTitle("little pony2");
             filmText.setDescription("little little pony2");
+            filmText.setFilm(film);
             filmTextRepository.save(filmText);
 
             session.getTransaction().commit();
