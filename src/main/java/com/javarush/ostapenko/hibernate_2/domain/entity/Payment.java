@@ -6,9 +6,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.sql.Types;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -40,8 +42,9 @@ public class Payment {
     private BigDecimal amount;
 
     @Column(name="payment_date")
-    private Date paymentDate;
+    private LocalDateTime paymentDate;
 
     @Column(name="last_update")
-    private Date lastUpdate;
+    @UpdateTimestamp
+    private LocalDateTime lastUpdate;
 }
