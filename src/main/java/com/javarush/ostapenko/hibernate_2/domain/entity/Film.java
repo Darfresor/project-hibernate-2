@@ -31,27 +31,34 @@ public class Film {
     @Column(name = "release_year", columnDefinition = "YEAR")
     private Integer releaseYear;
 
-    @OneToOne
-    @JoinColumn(name="language_id")
+    @ManyToOne
+    @JoinColumn(name = "language_id")
     private Language language;
 
-    @OneToOne
-    @JoinColumn(name="original_language_id")
+    @ManyToOne
+    @JoinColumn(name = "original_language_id")
     private Language originalLanguage;
 
     @Column(name = "rental_duration")
     @JdbcTypeCode(Types.TINYINT)
     private Integer rentalDuration;
+
     @Column(name = "rental_rate")
     private BigDecimal rentalRate;
     private Short length;
+
     @Column(name = "replacement_cost")
     private BigDecimal replacementCost;
-    @JdbcTypeCode(Types.CHAR)
-    private String rating;
+
+    //    @Enumerated(EnumType.STRING)  // Сохраняет имя enum как строку
+    @Convert(converter = RatingConverter.class)
+    @Column(columnDefinition = "enum('G', 'PG', 'PG-13', 'R', 'NC-17')")
+    private Rating rating;
+
     @Column(name = "special_features")
     @JdbcTypeCode(Types.CHAR)
     private String specialFeatures;
+
     @Column(name = "last_update")
     @UpdateTimestamp
     private Date lastUpdate;
@@ -66,14 +73,14 @@ public class Film {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name="film_category",
-            joinColumns = @JoinColumn(name="film_id"),
-            inverseJoinColumns = @JoinColumn(name="category_id")
+            name = "film_category",
+            joinColumns = @JoinColumn(name = "film_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
     )
     private List<Category> categoryList;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="film_id")
+    @JoinColumn(name = "film_id")
     private FilmText filmText;
 
 }

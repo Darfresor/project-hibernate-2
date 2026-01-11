@@ -97,8 +97,7 @@ public class Main {
             session.beginTransaction();
 
             List<Film> filmList = filmRepository.findAll();
-            System.out.println(filmList.get(0).getLanguage());
-            System.out.println(filmList.get(0).getOriginalLanguage());
+            System.out.println(filmList.get(0).getRating());
 //
 //            List<Actor> actorList = actorRepository.findAll();
 //            System.out.println(actorList);
@@ -183,7 +182,7 @@ public class Main {
             film.setRentalRate(BigDecimal.valueOf(1.99));
             film.setLength((short) 13);
             film.setReplacementCost(BigDecimal.valueOf(13.33));
-            film.setRating("PG");
+            film.setRating(Rating.valueOf("PG"));
             film.setSpecialFeatures("Deleted Scenes,Behind the Scenes");
             film.setCategoryList(categoryList);
             film.setActorList(actorList);
