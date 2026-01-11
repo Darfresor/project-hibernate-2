@@ -96,8 +96,8 @@ public class Main {
         try (Session session = main.sessionFactory.getCurrentSession()) {
             session.beginTransaction();
 
-            List<Film> filmList = filmRepository.findAll();
-            System.out.println(filmList.get(0).getRating());
+//            List<Film> filmList = filmRepository.findAll();
+//            System.out.println(filmList.get(0).getRating());
 //
 //            List<Actor> actorList = actorRepository.findAll();
 //            System.out.println(actorList);
@@ -109,8 +109,8 @@ public class Main {
 //            List<Category> categoryListList = categoryRepository.findAll();
 //            System.out.println(categoryListList);
 //
-//            List<FilmText> filmTexts = filmTextRepository.findAll();
-//            System.out.println(filmTexts);
+            List<FilmText> filmTexts = filmTextRepository.findAll();
+            System.out.println(filmTexts.get(0).getFilm());
 //
 //            List<Inventory> inventoryList = inventoryRepository.findAll();
 //            System.out.println(inventoryList.get(0).getStore());

@@ -14,7 +14,7 @@ import java.sql.Types;
 @Setter
 @Getter
 @NoArgsConstructor
-@ToString
+@ToString(exclude = "film")
 public class FilmText {
     @Id
     @Column(name = "film_id")
@@ -25,4 +25,7 @@ public class FilmText {
 
     @JdbcTypeCode(Types.LONGVARCHAR)
     private String description;
+
+    @OneToOne(mappedBy = "filmText")
+    private Film film;
 }
