@@ -183,8 +183,8 @@ public class Main {
             customerRepository.save(customer);
 
             session.getTransaction().commit();
+            return customer;
         }
-        return null;
     }
 
 
