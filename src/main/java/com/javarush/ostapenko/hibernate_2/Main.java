@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -170,6 +171,13 @@ public class Main {
             rental.setStaff(staff);
             rentalRepository.save(rental);
 
+            Payment payment = new Payment();
+            payment.setCustomer(customer);
+            payment.setStaff(staff);
+            payment.setRental(rental);
+            payment.setPaymentDate(LocalDateTime.now());
+            payment.setAmount(BigDecimal.valueOf(55.47));
+            paymentRepository.save(payment);
 
             session.getTransaction().commit();
         }
