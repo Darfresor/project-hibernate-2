@@ -18,6 +18,6 @@ public class RatingConverter implements AttributeConverter<Rating, String> {
         if (dbData == null) {
             return null;
         }
-        return Rating.fromDbValue(dbData);  // Используем ваш метод
+        return Rating.fromDbValue(dbData);
     }
 }
