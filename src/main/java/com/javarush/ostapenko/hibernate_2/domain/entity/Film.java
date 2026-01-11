@@ -31,9 +31,9 @@ public class Film {
     @Column(name = "release_year", columnDefinition = "YEAR")
     private Integer releaseYear;
 
-    @OneToMany
+    @OneToOne
     @JoinColumn(name="language_id")
-    private List<Language> languageList;
+    private Language language;
 
 
     @Column(name = "original_language_id")
