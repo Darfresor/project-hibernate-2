@@ -135,8 +135,8 @@ public class Main {
 //            List<Payment> paymentList = paymentRepository.findAll();
 //            System.out.println(paymentList.get(0).getStaff());
 
-            List<Staff> staffList = staffRepository.findAll();
-            System.out.println(staffList.get(0).getAddress());
+//            List<Staff> staffList = staffRepository.findAll();
+//            System.out.println(staffList.get(0).getAddress());
 
             session.getTransaction().commit();
         }
@@ -147,7 +147,9 @@ public class Main {
 
     public static void main(String[] args) {
         Main main = new Main();
-        main.getEntity(main);
+//        main.getEntity(main);
+        Customer customer = main.createCustomer();
+
 
 
 
@@ -155,7 +157,35 @@ public class Main {
         main.shutdown();
     }
 
+    private Customer createCustomer() {
+        try (Session session = sessionFactory.getCurrentSession()) {
+            session.beginTransaction();
 
+            Store store = storeRepository.getItems(0,1).get(0);
+
+            City city = cityRepository.getById(1);
+
+            Address address = new Address();
+            address.setAddress("Аргентина");
+            address.setDistrict("Третий дистрикт");
+            address.setCity(city);
+            address.setPostal_code("90349495");
+            address.setPhone("2340240240");
+            addressRepository.save(address);
+
+            Customer customer = new Customer();
+            customer.setStore(store);
+            customer.setFirstName("first");
+            customer.setLastName("last");
+            customer.setEmail("email");
+            customer.setAddress(address);
+            customer.setActive(true);
+            customerRepository.save(customer);
+
+            session.getTransaction().commit();
+        }
+        return null;
+    }
 
 
 }
